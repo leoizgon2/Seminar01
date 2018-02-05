@@ -7,9 +7,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //sobre escribe le metodo de la actividad e invoca a su implementación en la superclase
+
         super.onCreate(savedInstanceState);
-        //asocia el layout XML a la actividad
         setContentView(R.layout.activity_main);
+        TextView tv=(TextView)findViewById(R.id.tvDynamicTextInt);
+        TextView tv2=(TextView)findViewById(R.id.tvDynamicTextInt);
+
     }
 }
