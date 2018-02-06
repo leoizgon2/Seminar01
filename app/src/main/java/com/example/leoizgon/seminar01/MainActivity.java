@@ -1,5 +1,7 @@
 package com.example.leoizgon.seminar01;
 
+import android.app.Application;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,29 +52,55 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String TAG="LIFECYCLE";
+    private static final int REQUEST=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         TextView tv=(TextView)findViewById(R.id.dynamic_int);
         TextView tv2=(TextView)findViewById(R.id.dynamic_string);
+
         tv.setText("Dynamic text assigned  by code(int)");
         tv2.setText("Dynamic text assigned by code (String)");
+
          Log.d(TAG,"Creating the activity");
-        Button button=(Button)findViewById(R.id.onClickListener_code);
+         Button button=(Button)findViewById(R.id.onClickListener_code);
+
+        //Mensaje que se muestra a traves del codigo utilizando un Listener 1 boton
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this,R.string.onClickListener_code,Toast.LENGTH_SHORT).show();
+                //Intent explicito asociado a la nueva actividad SecondActvity
+                Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+                startActivity(intent);
             }
-        });
 
+
+        });
     }
 
+
+    @Override
+    protected  void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        switch (requestCode){
+            case INTENT_CODE:
+                Toast.makeText(getApplicationContext(),data.getStringExtra("result"),Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+//Mensaje que se muestra a travez del fichero XML 2 boton
+    private static final  int INTENT_CODE=1;
     public void displayMessage(View v){
         Toast.makeText(MainActivity.this,R.string.onClickListener_layout,Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+        intent.putExtra("my_parameter","Leonardo");
+        startActivityForResult(intent,INTENT_CODE);
 
     }
 }

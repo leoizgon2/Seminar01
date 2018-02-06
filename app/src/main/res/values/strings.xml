@@ -5,4 +5,6 @@
     <string name="dynamic_string">Dynamic text assigned by code (String)</string>
     <string name="onClickListener_code">Button 1 clicked </string>
     <string name="onClickListener_layout">Button 2 clicked </string>
+    <string name="tvMessage">Welcome to the Second Activity </string>
+    <string name="data_tranfer">Welcome to the Second Activity,%1$s </string>
 </resources>
