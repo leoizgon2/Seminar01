@@ -2,8 +2,11 @@ package com.example.leoizgon.seminar01;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.util.Log;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +60,19 @@ public class MainActivity extends AppCompatActivity {
         TextView tv2=(TextView)findViewById(R.id.dynamic_string);
         tv.setText("Dynamic text assigned  by code(int)");
         tv2.setText("Dynamic text assigned by code (String)");
-       Log.d(TAG,"Creating the activity");
+         Log.d(TAG,"Creating the activity");
+        Button button=(Button)findViewById(R.id.onClickListener_code);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,R.string.onClickListener_code,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void displayMessage(View v){
+        Toast.makeText(MainActivity.this,R.string.onClickListener_layout,Toast.LENGTH_SHORT).show();
 
     }
 }
