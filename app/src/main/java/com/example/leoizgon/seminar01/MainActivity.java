@@ -2,6 +2,7 @@ package com.example.leoizgon.seminar01;
 
 import android.app.Application;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -68,6 +69,27 @@ public class MainActivity extends AppCompatActivity {
 
          Log.d(TAG,"Creating the activity");
          Button button=(Button)findViewById(R.id.onClickListener_code);
+         Button implicit_button=(Button)findViewById((R.id.button_implicit_intent));
+
+         //Le asociamos un lisener al botton para que responda a su pulsación
+         implicit_button.setOnClickListener(new View.OnClickListener(){
+
+             @Override
+             public  void onClick(View v){
+
+             Intent intent=new Intent();
+             intent.setAction(Intent.ACTION_VIEW);
+             intent.setData(Uri.parse("http://www.upv.es"));
+             intent.putExtra("id_value","http://www.upv.es");
+
+             Intent chooser =Intent.createChooser(intent,getResources().getString(R.string.chooser));
+//Comprobamos que exista alguna actividad en el sistema que pueda realizar esta acción (Ver pagina web UPV)
+             if(intent.resolveActivity(getPackageManager())!=null){
+              startActivity(chooser);
+             }
+
+             }
+         });
 
         //Mensaje que se muestra a traves del codigo utilizando un Listener 1 boton
         button.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this,R.string.onClickListener_code,Toast.LENGTH_SHORT).show();
                 //Intent explicito asociado a la nueva actividad SecondActvity
-                Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+               Intent intent=new Intent(MainActivity.this,SecondActivity.class);
                 startActivity(intent);
             }
 
